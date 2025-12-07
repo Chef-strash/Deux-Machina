@@ -1,0 +1,3 @@
+question 1 https://colab.research.google.com/drive/1nP_1A0xBW6DSRtaYs7TwugzqnvEtfPdQ?usp=sharing 
+question 2 https://colab.research.google.com/drive/1JYqujWuut6n04ADsJrUvlth7YsnAMPDr?usp=sharing
+question 3 https://colab.research.google.com/drive/13GZeVQ5HmB1ikbNpNfZfWpc2P3ouWe3N?usp=sharing
