@@ -1,0 +1,49 @@
+import gymnasium as gym
+
+# Initialise the environment
+env = gym.make("LunarLander-v3", render_mode="human")
+
+# Get the first observation -> Initial State
+observation, info = env.reset()
+# Here observation is the current state of the environment (i.e, the position and velocity of the lander)
+# observation is a numpy array of 8 floats representing the x coordinate, y coordinate, x velocity, y velocity, lander angle, angular velocity, left leg contact, right leg contact
+# You can use a subset of these values to create your own strategy for landing the lunar lander.
+x_coord = observation[0]
+y_coord = observation[1]
+vx=observation[2]
+vy=observation[3]
+angle=observation[4]
+print("Initial Observation:", observation)
+run = True
+total_reward = 0
+while(run):
+    if vx < -0.1 or x_coord<-0.1:
+        action = 3  # Fire right engine
+    elif vx > 0.1 or x_coord>0.1:
+        action = 1  # Fire left engine
+    else:
+        action = 0  # Do nothing
+    if angle < -0.1:
+        action = 1  # Fire left engine
+    elif angle > 0.1:
+        action = 3  # Fire right engine
+    if y_coord<0.6:
+        action = 2  # Fire main engine
+    # step (transition) through the environment with the action
+    # receiving the next observation, reward and if the episode has terminated or truncated
+    observation, reward, terminated, truncated, info = env.step(action)
+    x_coord = observation[0]
+    y_coord = observation[1]
+    vx=observation[2]
+    vy=observation[3]
+    angle=observation[4]
+    
+    total_reward += reward
+    # If the episode has ended then we can reset to start a new episode
+    if terminated or truncated:
+        observation, info = env.reset()
+        run = False
+
+print("Total Reward:", total_reward)
+
+env.close()
